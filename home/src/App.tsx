@@ -4,6 +4,7 @@ import { Footer } from "./components/Footer";
 import { HomeContent } from "./components/HomeContent";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import PDPContent from "pdp/PDPContent";
+import CartContent from "cart/CartContent";
 
 function App() {
   return (
@@ -14,7 +15,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HomeContent />} />
             <Route path="/product/:id" element={<PDPContent />} />
-            {/* <Route path="/cart" element={<CartContent />} /> */}
+            <Route path="/cart" element={<CartContent />} />
           </Routes>
         </div>
         <Footer />

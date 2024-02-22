@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { currency, getProducts } from "@/products";
-// import { addToCart, useLoggedIn } from "cart/cart";
+import { addToCart, useLoggedIn } from "cart/cart";
 import { Link } from "react-router-dom";
 
 export const HomeContent = () => {
-  // const loggedIn = useLoggedIn();
+  const loggedIn = useLoggedIn();
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -25,7 +25,7 @@ export const HomeContent = () => {
             <div className="flex-end">{currency.format(product.price)}</div>
           </div>
           <div className="mt-4 text-sm">{product.description}</div>
-          {/* {loggedIn && (
+          {loggedIn && (
             <div className="mt-2 text-right">
               <button
                 className="px-4 py-2 text-sm font-bold text-white bg-blue-500 rounded hover:bg-blue-700"
@@ -35,7 +35,7 @@ export const HomeContent = () => {
                 Add to Cart
               </button>
             </div>
-          )} */}
+          )}
         </div>
       ))}
     </div>

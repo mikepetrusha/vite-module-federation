@@ -7,7 +7,7 @@ export default defineConfig({
   plugins: [
     react(),
     federation({
-      name: "pdp",
+      name: "cart",
       filename: "remoteEntry.js",
       remotes: {
         home: "http://localhost:5001/assets/remoteEntry.js",
@@ -15,9 +15,12 @@ export default defineConfig({
         cart: "http://localhost:5003/assets/remoteEntry.js",
       },
       exposes: {
-        "./PDPContent": "./src/components/PDPContent",
+        "./cart": "./src/cart.ts",
+        "./Login": "./src/Login.tsx",
+        "./MiniCart": "./src/MiniCart.tsx",
+        "./CartContent": "./src/CartContent.tsx",
       },
-      shared: ["react", "react-dom", "react-router-dom"],
+      shared: ["react", "react-dom", "react-router-dom", "rxjs"],
     }),
   ],
   resolve: {
