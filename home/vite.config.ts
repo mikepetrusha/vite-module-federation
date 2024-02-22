@@ -9,13 +9,17 @@ export default defineConfig({
     federation({
       name: "home",
       filename: "remoteEntry.js",
+      remotes: {
+        home: "http://localhost:5001/assets/remoteEntry.js",
+        pdp: "http://localhost:5002/assets/remoteEntry.js",
+      },
       exposes: {
         "./Footer": "./src/components/Footer",
         "./Header": "./src/components/Header",
         "./HomeContent": "./src/components/HomeContent",
         "./products": "./src/products",
       },
-      shared: ["react", "react-dom"],
+      shared: ["react", "react-dom", "react-router-dom"],
     }),
   ],
   resolve: {

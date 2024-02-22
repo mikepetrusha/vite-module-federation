@@ -11,8 +11,12 @@ export default defineConfig({
       filename: "remoteEntry.js",
       remotes: {
         home: "http://localhost:5001/assets/remoteEntry.js",
+        pdp: "http://localhost:5002/assets/remoteEntry.js",
       },
-      shared: ["react", "react-dom"],
+      exposes: {
+        "./PDPContent": "./src/components/PDPContent",
+      },
+      shared: ["react", "react-dom", "react-router-dom"],
     }),
   ],
   resolve: {

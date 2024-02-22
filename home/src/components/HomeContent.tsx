@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { currency, getProducts } from "@/products";
-import { addToCart, useLoggedIn } from "cart/cart";
-// import { Link } from "react-router-dom";
+// import { addToCart, useLoggedIn } from "cart/cart";
+import { Link } from "react-router-dom";
 
 export const HomeContent = () => {
-  //   const loggedIn = useLoggedIn();
+  // const loggedIn = useLoggedIn();
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -15,12 +15,12 @@ export const HomeContent = () => {
     <div className="grid grid-cols-4 gap-5">
       {products.map((product: any) => (
         <div key={product.id}>
-          {/* <Link to={`/product/${product.id}`}> */}
-          <img src={product.image} alt={product.name} />
-          {/* </Link> */}
+          <Link to={`/product/${product.id}`}>
+            <img src={product.image} alt={product.name} />
+          </Link>
           <div className="flex">
             <div className="flex-grow font-bold">
-              {/* <Link to={`/product/${product.id}`}>{product.name}</Link> */}
+              <Link to={`/product/${product.id}`}>{product.name}</Link>
             </div>
             <div className="flex-end">{currency.format(product.price)}</div>
           </div>
