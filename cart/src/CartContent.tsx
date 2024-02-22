@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { cart, clearCart } from "cart/cart";
+import { cart, clearCart } from "cartremote/cart";
 import { currency } from "home/products";
 
 export default function CartContent() {

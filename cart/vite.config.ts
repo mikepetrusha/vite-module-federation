@@ -12,7 +12,7 @@ export default defineConfig({
       remotes: {
         home: "http://localhost:5001/assets/remoteEntry.js",
         pdp: "http://localhost:5002/assets/remoteEntry.js",
-        cart: "http://localhost:5003/assets/remoteEntry.js",
+        cartremote: "http://localhost:5003/assets/remoteEntry.js",
       },
       exposes: {
         "./cart": "./src/cart.ts",
