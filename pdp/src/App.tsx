@@ -2,6 +2,7 @@ import "./App.css";
 import { Header } from "home/Header";
 import { Footer } from "home/Footer";
 import PDPContent from "./components/PDPContent";
+import CartContent from "cart/CartContent";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
         </div>
         <Routes>
           <Route path="/product/:id" element={<PDPContent />} />
+          <Route path="/cart" element={<CartContent />} />
         </Routes>
         <Footer />
       </div>

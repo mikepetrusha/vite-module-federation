@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { currency, getProducts } from "@/products";
 import { addToCart, useLoggedIn } from "cart/cart";
 import { Link } from "react-router-dom";
+import { CartItem } from "@/types";
 
 export const HomeContent = () => {
   const loggedIn = useLoggedIn();
@@ -13,7 +14,7 @@ export const HomeContent = () => {
 
   return (
     <div className="grid grid-cols-4 gap-5">
-      {products.map((product: any) => (
+      {products.map((product: CartItem) => (
         <div key={product.id}>
           <Link to={`/product/${product.id}`}>
             <img src={product.image} alt={product.name} />

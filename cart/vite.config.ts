@@ -12,10 +12,10 @@ export default defineConfig({
       remotes: {
         home: "http://localhost:5001/assets/remoteEntry.js",
         pdp: "http://localhost:5002/assets/remoteEntry.js",
-        cartremote: "http://localhost:5003/assets/remoteEntry.js",
+        cart: "http://localhost:5003/assets/remoteEntry.js",
       },
       exposes: {
-        "./cart": "./src/cart.ts",
+        "./cart": "./src/cart.tsx",
         "./Login": "./src/Login.tsx",
         "./MiniCart": "./src/MiniCart.tsx",
         "./CartContent": "./src/CartContent.tsx",
@@ -23,6 +23,7 @@ export default defineConfig({
       shared: ["react", "react-dom", "react-router-dom", "rxjs"],
     }),
   ],
+
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),

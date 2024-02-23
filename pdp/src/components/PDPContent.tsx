@@ -1,17 +1,23 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getProductById, currency } from "home/products";
+import { CartItem } from "@/types";
 
 export default function PDPContent() {
   const { id } = useParams();
-  const [product, setProduct] = useState<any>(null);
+  const [product, setProduct] = useState<CartItem | null>(null);
 
   useEffect(() => {
-    if (id) {
-      getProductById(id).then(setProduct);
-    } else {
-      setProduct(null);
-    }
+    const fetchProduct = async () => {
+      if (id) {
+        const productData = await getProductById(id);
+        setProduct(productData);
+      } else {
+        setProduct(null);
+      }
+    };
+
+    fetchProduct();
   }, [id]);
 
   if (!product) return null;
@@ -22,9 +28,9 @@ export default function PDPContent() {
         <img src={product.image} alt={product.name} />
       </div>
       <div>
-        <div className="flex">
-          <h1 className="flex-grow text-3xl font-bold">{product.name}</h1>
-          <div className="text-3xl font-bold flex-end">
+        <div className="flex items-center justify-between">
+          <h1 className="text-3xl font-bold">{product.name}</h1>
+          <div className="text-3xl font-bold">
             {currency.format(product.price)}
           </div>
         </div>

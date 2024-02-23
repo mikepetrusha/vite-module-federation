@@ -1,58 +1,52 @@
-import React, { useState, useEffect } from "react";
-import { cart, clearCart } from "cartremote/cart";
+import { useEffect, useState } from "react";
+import { cart, clearCart } from "cart/cart";
 import { currency } from "home/products";
+import { Cart, CartItem } from "./types";
 
 export default function CartContent() {
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState<CartItem[]>([]);
 
-  useEffect(
-    () => cart.subscribe((value: any) => setItems(value?.cartItems ?? [])),
-    []
+  useEffect(() => {
+    const subscription = cart.subscribe((value: Cart) => {
+      setItems(value?.cartItems ?? []);
+    });
+    return () => subscription.unsubscribe();
+  }, []);
+
+  const total = items.reduce(
+    (acc, item) => acc + item.quantity * item.price,
+    0
   );
 
   return (
     <>
       <div className="grid grid-cols-4 gap-5 my-10">
-        {items.map((item: any) => (
-          <React.Fragment key={item.id}>
-            <div>{item.quantity}</div>
-            <img src={item.image} alt={item.name} className="max-h-6" />
-            <div>{item.name}</div>
-            <div className="text-right">
-              {currency.format(item.quantity * item.price)}
-            </div>
-          </React.Fragment>
+        {items.map((item) => (
+          <CartItem key={item.id} item={item} />
         ))}
-        <div></div>
-        <div></div>
-        <div></div>
-        <div className="text-right" id="grand_total">
-          {currency.format(
-            items.reduce((a: any, v: any) => a + v.quantity * v.price, 0)
-          )}
+        <div className="col-span-4 font-bold text-right">
+          {currency.format(total)}
         </div>
       </div>
       {items.length > 0 && (
-        <div className="flex mb-10">
-          <div className="flex-grow">
-            <button
-              id="clearcart"
-              className="px-5 py-2 text-sm text-green-800 bg-white border border-green-800 rounded-md"
-              onClick={clearCart}
-            >
-              Clear Cart
-            </button>
-          </div>
-          <div className="flex-end">
-            <button
-              className="px-5 py-2 text-sm text-white bg-green-900 rounded-md"
-              onClick={clearCart}
-            >
-              Checkout
-            </button>
-          </div>
+        <div className="flex justify-between mb-10">
+          <button onClick={clearCart}>Clear Cart</button>
+          <button onClick={clearCart}>Checkout</button>
         </div>
       )}
     </>
   );
 }
+
+const CartItem = ({ item }: { item: CartItem }) => {
+  return (
+    <>
+      <div>{item.quantity}</div>
+      <img src={item.image} alt={item.name} className="max-h-6" />
+      <div>{item.name}</div>
+      <div className="text-right">
+        {currency.format(item.quantity * item.price)}
+      </div>
+    </>
+  );
+};

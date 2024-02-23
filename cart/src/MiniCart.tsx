@@ -2,24 +2,25 @@ import React, { useEffect, useState } from "react";
 
 import { cart, clearCart } from "./cart";
 import { currency } from "home/products";
+import { Cart, CartItem } from "./types";
 
 export default function MiniCart() {
-  const [items, setItems] = useState(undefined);
+  const [items, setItems] = useState<CartItem[]>([]);
   const [showCart, setShowCart] = useState(false);
 
   useEffect(() => {
-    setItems(cart.value?.cartItems);
-    return cart.subscribe((c) => {
-      setItems(c?.cartItems);
+    const subscription = cart.subscribe((value: Cart | null) => {
+      setItems(value?.cartItems ?? []);
     });
+    return () => subscription.unsubscribe();
   }, []);
 
   if (!items) return null;
 
   return (
     <>
-      <span onClick={() => setShowCart(!showCart)} id="showcart_span">
-        <i className="text-2xl ri-shopping-cart-2-fill" id="showcart"></i>
+      <span onClick={() => setShowCart(!showCart)}>
+        <i className="text-2xl ri-shopping-cart-2-fill"></i>
         {items.length}
       </span>
       {showCart && (
@@ -60,7 +61,6 @@ export default function MiniCart() {
             <div className="flex">
               <div className="flex-grow">
                 <button
-                  id="clearcart"
                   className="px-5 py-2 text-sm text-green-800 bg-white border border-green-800 rounded-md"
                   onClick={clearCart}
                 >

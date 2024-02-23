@@ -1,5 +1,4 @@
 import { useState } from "react";
-
 import { login, useLoggedIn } from "./cart";
 
 export default function Login() {
@@ -13,11 +12,7 @@ export default function Login() {
 
   return (
     <>
-      <span onClick={() => setShowLogin(!showLogin)}>
-        <i className="text-2xl ri-fingerprint-line" id="showlogin">
-          Cart
-        </i>
-      </span>
+      <span onClick={() => setShowLogin(!showLogin)}>Cart</span>
       {showLogin && (
         <div
           className="absolute p-5 text-black bg-white border-4 border-blue-800 rounded-xl"
@@ -43,7 +38,6 @@ export default function Login() {
           <button
             className="px-5 py-2 mt-5 text-sm text-white bg-green-900 rounded-md"
             onClick={() => login(username, password)}
-            id="loginbtn"
           >
             Login
           </button>
